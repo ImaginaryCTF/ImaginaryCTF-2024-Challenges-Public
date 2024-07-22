@@ -1,0 +1,12 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: left-in-the-dark
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+  healthcheck:
+    enabled: false
+  image: eu.gcr.io/imaginaryctf-2023/left-in-the-dark-challenge:d34f20bad7fc14ed381b86fa1037dd0dd248ee4f8c16724b2dfc201347fd5adc

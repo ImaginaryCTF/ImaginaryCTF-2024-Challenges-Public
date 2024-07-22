@@ -1,0 +1,103 @@
+# prep the seed
+# push a bunch of numbers
+pushi 1231231231
+pushi 1231231231
+pushi 2131232312
+pushi 1232132321
+xor 0
+pop 1
+push 0
+xor 0
+pop 1
+push 0
+xor 0
+pop 1
+push 0
+# multiplier
+push 32423423421
+mul 0
+push 0
+# increment
+push 23123821421
+add 0
+push 0
+pop 8
+# lcg iteration
+push 8
+push 32423423421
+mul 0
+push 0
+push 23123821421
+add 0
+push 0
+pop 7
+push 7
+# end lcg iteration
+# lcg iteration
+push 7
+push 32423423421
+mul 0
+push 0
+push 23123821421
+add 0
+push 0
+pop 6
+push 6
+# end lcg iteration
+# lcg iteration
+push 6
+push 32423423421
+mul 0
+push 0
+push 23123821421
+add 0
+push 0
+pop 5
+push 5
+# end lcg iteration
+
+...
+
+inp
+push 42213123
+mul 0
+pop 1
+pop 1
+push 0
+inp
+push 12321332
+mul 0
+pop 1
+pop 1
+push 0
+inp
+push 34382343
+mul 0
+pop 1
+pop 1
+push 0
+inp
+push 92814284
+mul 0
+pop 1
+pop 1
+push 0
+add 2
+pop 1
+pop 1
+push 2
+add
+pop 1
+pop 1
+push 2
+add 2
+pop 1
+pop 1
+push 2
+xor 2
+cmp 0
+jmp 1
+
+
+
+

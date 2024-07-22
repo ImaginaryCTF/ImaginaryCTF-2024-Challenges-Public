@@ -1,0 +1,12 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: gdbjail2
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+  healthcheck:
+    enabled: false
+  image: eu.gcr.io/imaginaryctf-2023/gdbjail2-challenge:127ad55d6e18cfb4439c854d158f7b8775d8dc3cb6d5031507110ab7237e0667

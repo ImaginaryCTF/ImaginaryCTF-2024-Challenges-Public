@@ -1,0 +1,16 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: readme
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+    ports:
+      - protocol: "TCP"
+        port: 80
+        targetPort: 80
+  healthcheck:
+    enabled: false
+  image: eu.gcr.io/imaginaryctf-2023/readme-challenge:66fc85d7fc75fbbcecd02c8f799421476a070eff590de8be3984d03e19b7b051

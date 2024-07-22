@@ -1,0 +1,12 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: ictf-band
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+  healthcheck:
+    enabled: false
+  image: eu.gcr.io/imaginaryctf-2023/ictf-band-challenge:8da4817c2c6103b08b295b0cadf8eca2d5a489d32063b193c4eeb57c7d30d540

@@ -1,0 +1,6 @@
+(executable
+ (public_name oh_a_camel)
+ (name main)
+ (libraries oh_a_camel cryptokit)
+ (preprocessor_deps (file "../maze.txt") (file "../flag.enc.txt") (file "../preprocess.sh"))
+ (preprocess (action (system "./preprocess.sh"))))

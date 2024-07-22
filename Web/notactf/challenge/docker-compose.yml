@@ -1,0 +1,18 @@
+db:
+  image: mongo:latest
+  hostname: test_mongodb
+  environment:
+    - MONGO_INITDB_DATABASE=main
+    - MONGO_INITDB_ROOT_USERNAME=root
+    - MONGO_INITDB_ROOT_PASSWORD=Pa1920sW2i1w0rand0000m2191rd
+  ports:
+    - 27017:27017
+
+app:
+  build: .
+  command: python -u app.py
+  ports:
+    - "8080:8080"
+  links:
+    - db
+

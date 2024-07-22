@@ -1,0 +1,17 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: heapnotes-admin-bot
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+    ports:
+      - protocol: "TCP"
+        targetPort: 1337
+  healthcheck:
+    enabled: false
+  allowConnectTo:
+    - heapnotes
+  image: eu.gcr.io/imaginaryctf-2023/heapnotes-admin-bot-challenge:57c24006ea771469795bf3713a3fb3a6bc707c78905ed5113657e66a15d4d130

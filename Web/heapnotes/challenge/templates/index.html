@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <!-- Include Bootstrap for styling (optional) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Welcome to HeapNotes</h2>
+        <h4>where you have a whole heap of notes!</h4><br>
+
+        {% if current_user.is_authenticated %}
+            <p>You are logged in. You can <a href="/create">create a note</a>.</p>
+            <p><a href="/logout">Logout</a></p>
+        {% else %}
+            <p>You are not logged in. Please <a href="/login">login</a> or <a href="/register">register</a>.</p>
+        {% endif %}
+        
+    </div>
+</body>
+</html>

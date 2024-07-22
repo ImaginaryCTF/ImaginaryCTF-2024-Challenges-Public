@@ -1,0 +1,29 @@
+<div style="
+    display: flex; 
+    justify-content: center; 
+    flex-direction: column; 
+    align-items: center;
+">
+<pre style="
+    white-space: pre-wrap;
+    width: fit-content;
+    padding-top: 0;
+    margin-top: 0;
+"><code>
+{{ maze }}
+</code></pre>
+<div>
+{{ flag }}
+</div>
+<form method="post" style="
+    width: fit-content;
+    padding: 0;
+    margin: 0;
+">
+    <button name="Up" value="Up" formaction="/move?id={{ mazeId }}&move=up">Up</button>
+    <button name="Down" value="Down" formaction="/move?id={{ mazeId }}&move=down">Down</button>
+    <button name="Left" value="Left" formaction="/move?id={{ mazeId }}&move=left">Left</button>
+    <button name="Right" value="Right" formaction="/move?id={{ mazeId }}&move=right">Right</button>
+</form>
+<p style="padding: 0">View my <a href="/source">source</a>!</p>
+</div>

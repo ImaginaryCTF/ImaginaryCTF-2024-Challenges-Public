@@ -1,0 +1,100 @@
+<html>
+
+<head>
+
+
+	<title>Admin Panel</title>
+	<link rel="stylesheet" type="text/css" href="static/css/admin.css" />
+	<link rel="stylesheet" type="text/css" href="static/css/modified_bootstrap.css" />
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+
+
+<div id="navbar">
+
+	<div class="nav">
+		<a class="active" href="/challenges">Challenges</a>
+		<a href="/home">Home</a>
+		<a href="/leaderboard">Leaderboard</a>
+		<a href="/solves">Solves</a>
+		<a href="/discord">Discord</a>
+
+
+		<input id="flag" type="text" placeholder="Submit a Flag!" required>
+  <button id="flagsubmit" type="submit" onclick="submitflag()"><i class="s"></i>Submit</button>
+  
+  <a href="/logout" class="logout" style="float: right;">Logout</a>
+
+</div>
+
+
+
+
+<div class="container">
+  <h2>Challenge Control</h2>
+    <div class="form-group">
+      <label for="comment">Challenges:</label>
+      <textarea class="form-control" rows="15" name="text" id="chall-conf-input"></textarea>
+
+
+    </div>
+</div>
+
+<script>
+  
+
+function submitflag(){
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/submit');
+
+
+    xhr.setRequestHeader('submitted-flag', document.getElementById('flag').value);
+    xhr.setRequestHeader('user-auth-token', "{{authtoken}}");
+
+    xhr.send();
+
+    xhr.onload = () => {
+      alert(xhr.responseText);
+    }
+    
+      var clearflag = document.getElementById("flag");
+      clearflag.value = "";
+
+
+}
+
+
+function get_challconf(){
+let challconfbox = document.getElementById('chall-conf-input')
+
+
+const xhr = new XMLHttpRequest();
+xhr.open('POST', '/admin');
+
+
+xhr.setRequestHeader('action', 'get-challenges');
+xhr.setRequestHeader('user-auth-token', "{{authtoken}}");
+
+xhr.send();
+
+xhr.onload = () => {
+  challconfbox.value = String(xhr.responseText);
+
+  }
+
+}
+
+
+
+
+get_challconf();
+
+</script>
+</body>
+
+
+</html>

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}{{ form.title }}{% endblock %}
+
+{% block content %}
+<h3>{{ form.title }} by {{ form.author.username }}</h3>
+{% for q in form.questions %}
+{% set name = 'q_' + (loop.index0 | string()).zfill(2) %}
+<div class="mb-3">
+    <label class="form-text" for="{{ name }}">{{ loop.index }}. {{ q.content }}</label> <input type="text" class="question form-control" name="{{ name }}" value="{{ answers.get(name, '') }}" />
+</div>
+{% endfor %}
+<button class="btn btn-primary rounded-3" name="submit" onclick="submitAnswers()">Submit your answers</button>
+<script>
+function submitAnswers() {
+    let answers = Array.from(document.querySelectorAll('.question')).map(x => x.value);
+    
+    let form = document.createElement('form');
+    form.hidden = true;
+    form.action = '/form/fill/{{ form.id }}';
+    form.method = 'POST';
+    answers.forEach((x, i) => {
+        let node = document.createElement('input');
+        node.name = `q_${String(i).padStart(2, '0')}`;
+        node.value = x;
+        form.appendChild(node);
+    });
+    document.body.appendChild(form);
+    form.submit();
+}
+</script>
+{% endblock %}

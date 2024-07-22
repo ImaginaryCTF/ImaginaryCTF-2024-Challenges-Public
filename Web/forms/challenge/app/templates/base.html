@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link href="/static/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                {% if current_user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="/form/create">Create a new form</a></li>
+                <li class="nav-item"><a class="nav-link" href="/form/list">See your forms</a></li>
+                <li class="nav-item"><a class="nav-link" href="/logout">Log out ({{ current_user.username }})</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="/login">Log in</a></li>
+                <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <div class="container d-flex flex-column justify-content-center align-items-center pt-3">
+            <div id="message" class="card text-bg-success mb-3" style="width: 50%;" hidden>
+                <div class="card-body">
+                    <p class="card-text"></p>
+                    <button class="btn btn-primary rounded-3" onclick="showNextMessage()">Show next message</button>
+                </div>
+            </div>
+        </div>
+        <div class="container py-3">
+        {% block content %}{% endblock %}
+        </div>
+        <script>
+        const messages = [
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% for category, message in messages %}
+                    {category: '{{ category }}', message: {{ message | tojson }} },
+                {% endfor %}
+            {% endwith %}
+        ];
+
+        function showNextMessage() {
+            let messageBox = document.querySelector('#message');
+            let messageContent = messageBox.querySelector('.card-text');
+            if(messages.length == 0) {
+                messageBox.hidden = true;
+            } else {
+                messageBox.hidden = false;
+                let message = messages.shift();
+                messageBox.classList = ['card', 'mb-3', `text-bg-${message.category == 'info' ? 'success' : 'danger'}`].join(' ');
+                messageContent.textContent = message.message;
+            }
+        }
+
+        showNextMessage();
+        </script>
+        <script src="/static/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

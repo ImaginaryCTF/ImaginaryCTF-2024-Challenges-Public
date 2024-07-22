@@ -1,0 +1,16 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: "notactf"
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+    ports:
+      - protocol: "TCP"
+        port: 80
+        targetPort: 80
+  healthcheck:
+    enabled: false
+  image: eu.gcr.io/imaginaryctf-2023/notactf-challenge:d5930b5fae3172df9d10041e65205ebecb0147f3e90c9482017526dc835044d1

@@ -1,0 +1,160 @@
+
+<html>
+
+<head>
+
+
+	<title>Challenges</title>
+	<link rel="stylesheet" type="text/css" href="static/css/challenges.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel='stylesheet' href='https://pagecdn.io/lib/normalize/8.0.1/normalize.css'>
+
+</head>
+
+
+
+<div id="navbar">
+
+	<div class="nav">
+		<a class="active" href="/challenges">Challenges</a>
+		<a href="/home">Home</a>
+		<a href="/leaderboard">Leaderboard</a>
+		<a href="/solves">Solves</a>
+		<a href="/discord">Discord</a>
+
+
+		<input id="flag" type="text" placeholder="Submit a Flag!" required>
+  <button id="flagsubmit" type="submit" onclick="submitflag()"><i class="s"></i>Submit</button>
+  
+  <a href="/logout" class="logout" style="float: right;">Logout</a>
+
+  </div>
+</div>
+
+<center><h1>Challenges:</h1></center>
+
+
+      
+{% for chall in challs %}  
+
+<div class="cardContainer">
+
+<div class="card" style="background-color:white;">
+
+<!--card content inside this div-->
+
+<h3 style="text-align: center; color: rgb(104, 92, 92);">{{chall.get('Chall_Name')}}</h3>
+<h4 style="text-align: center; color: rgb(104, 92, 92);">({{chall.get('Points')}} points) </h4>
+
+<p style="text-align: center; color: rgb(104, 92, 92);">Category: Misc</p>
+<center><button onclick="document.getElementById('{{chall.get('Chall_Name')}}').style.display='block'" style="margin: 0 auto;" class="w3-button w3-black" style="margin: auto;">View Challenge</button></center>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+<!--Modals-->
+{% for chall in challs %}
+  <div id="{{chall.get('Chall_Name')}}" class="w3-modal">
+    <div class="w3-modal-content w3-animate-zoom w3-card-4">
+      <header class="w3-container w3-blue"> 
+        <span onclick="document.getElementById('{{chall.get('Chall_Name')}}').style.display='none'" 
+        class="w3-button w3-display-topright">X</span>
+       <center> <h2>{{chall.get('Chall_Name')}} | {{chall.get('Points')}} points</h2> </center>
+      </header>
+      <div class="w3-container">
+        <strong><center><h4>Category: {{chall.get('Category')}}</h4></center></strong>
+        
+
+        <strong><center><h4>Description:</h4></center></strong>
+        <center><p>{{chall.get('desc')}}</p></center>
+        <center><strong><h4>Attachments:</h4></strong>
+       
+        <a id="{{chall.get('attachment_1')}}-{{chall.get('Chall_Name')}}" href="{{chall.get('attachment_1')}}">Attachment 1</a>
+        <a id="{{chall.get('attachment_2')}}-{{chall.get('Chall_Name')}}1" href="{{chall.get('attachment_2')}}">Attachment 2</a>
+
+        </center>
+      </div>
+
+      <footer class="w3-container w3-blue">
+        <p style="color: #212529;">Author: {{chall.get('author')}}</p>
+      </footer>
+    </div>
+    
+  </div>
+<script>
+if ("{{chall.get('attachment_1')}}-{{chall.get('Chall_Name')}}" == "-{{chall.get('Chall_Name')}}"){
+  var attachmentisnone = document.getElementById("-{{chall.get('Chall_Name')}}");
+  attachmentisnone.style.display = "none";
+
+}
+</script>
+
+<script>
+
+if ("{{chall.get('attachment_2')}}-{{chall.get('Chall_Name')}}1" == "-{{chall.get('Chall_Name')}}1"){
+  var attachmentisnone1 = document.getElementById("-{{chall.get('Chall_Name')}}1");
+  attachmentisnone1.style.display = "none";
+
+
+}
+
+</script>
+{% endfor %}
+
+
+<style>
+   .card {
+      color: white;
+      float: left;
+      width: calc(20% - 20px);
+      padding: 10px;
+      border-radius: 10px;
+      margin: 10px;
+      height: 200px;
+      box-shadow: 0 0 11px rgba(33, 33, 33, 0.5);
+      cursor: pointer;
+      border: 1px solid #ccc;
+
+}
+
+   @media screen and (max-width: 600px) {
+      .card {
+         width: 100%;
+      }
+   }
+</style>
+
+
+
+<script>
+  
+function submitflag(){
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/submit');
+
+
+    xhr.setRequestHeader('submitted-flag', document.getElementById('flag').value);
+    xhr.setRequestHeader('user-auth-token', "{{authtoken}}");
+
+    xhr.send();
+
+    xhr.onload = () => {
+      alert(xhr.responseText);
+    }
+    
+      var clearflag = document.getElementById("flag");
+      clearflag.value = "";
+
+
+}
+</script>
+<script src="static/js/challenges.js"></script>
+</body>
+
+
+</html>

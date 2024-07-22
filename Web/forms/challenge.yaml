@@ -1,0 +1,17 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: "forms"
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+    ports:
+      - protocol: "TCP"
+        port: 80
+        targetPort: 5000
+  healthcheck:
+    enabled: true
+    image: eu.gcr.io/imaginaryctf-2023/forms-healthcheck:f924b21037ef38c7220ce4c34c542c197716c3c6e2c954ca605b705a4e1ba759
+  image: eu.gcr.io/imaginaryctf-2023/forms-challenge:3a7cf3083803a5d38b1039333271903b2e54329cfcc53362419b1b14dd32e581

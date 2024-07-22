@@ -1,0 +1,17 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: "pwning-en-logique"
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+    ports:
+      - protocol: "TCP"
+        port: 80
+        targetPort: 80
+  healthcheck:
+    enabled: true
+    image: eu.gcr.io/imaginaryctf-2023/pwning-en-logique-healthcheck:498dc88d603bb569c60b86e70488fad1deaccf4173580357626f9c65888eb067
+  image: eu.gcr.io/imaginaryctf-2023/pwning-en-logique-challenge:71c462a5b4feac5cea56f3c3ae144d2b1360fc9d9525932a2aeddf35d3572c46

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Your forms{% endblock %}
+
+{% block content %}
+<div class="mb-5">
+    <h1>Here you can ask the admin to fill in your forms:</h1>
+</div>
+{% for form in forms | reverse %}
+<div class="mb-5">
+    <form action="/form/ask/{{ form.id }}" method="POST">
+        <div class="mb-1">
+            <h3>Form name: <a class="link-underline link-underline-opacity-0" href="/form/fill/{{ form.id }}">{{ form.title }}</a></h3>
+            <hr class="mb-1" />
+        </div>
+        {% for question in form.questions %}
+        <div class="mb-1">
+            <b>Question</b>: {{ question.content }}
+        </div>
+        <div class="mb-1 form-check">
+            <b class="form-check-label">Should the admin answer this question?</b>
+            <input type="checkbox" class="form-check-input" name="{{ 'q_' + (loop.index0 | string).zfill(2) }}"/>
+        </div>
+        {% endfor %}
+        <button class="btn btn-primary rounded-3" type="submit">Ask the admin to fill in this form</button>
+    </form>
+</div>
+{% endfor %}
+{% endblock %}

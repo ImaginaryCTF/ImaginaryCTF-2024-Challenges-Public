@@ -1,0 +1,16 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: "p2c"
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+    ports:
+      - protocol: "TCP"
+        port: 80
+        targetPort: 80
+  healthcheck:
+    enabled: false
+  image: eu.gcr.io/imaginaryctf-2023/p2c-challenge:db87f2ed069077f0535765dd52d0fd9c3741dc49bce96c49cb5184e2fc528d3e

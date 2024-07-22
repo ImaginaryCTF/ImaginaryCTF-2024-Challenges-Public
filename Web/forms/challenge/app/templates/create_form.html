@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Create a new form{% endblock %}
+
+{% block content %}
+<h1>Create a new form</h1>
+<div>
+    <div class="mb-3">
+        <input type="text" class="form-control" name="title" placeholder="Title" />
+    </div>
+    <hr class="mb-5" />
+    <div class="mb-3" id="questionList">
+    </div>
+    <button class="btn btn-primary rounded-3" onclick="addQuestion()">Add another question</button>
+    <button class="btn btn-success rounded-3" onclick="createForm()">Create the form</button>
+</div>
+<div class="questionTemplate" hidden>
+    <input type="text" class="form-control" placeholder="Question" name="question" value="Are Ya Winning, Son?" required />
+    <div class="form-check">
+        <label for="required" class="form-check-label">Required?</label> <input type="checkbox" class="form-check-input" name="required" />
+    </div>
+    <button class="btn btn-danger rounded-3" onclick="deleteQuestion(this.parentElement)">Delete this question</button>
+</div>
+<script>
+function deleteQuestion(question) {
+    question.remove();
+}
+
+function addQuestion() {
+    let node = document.querySelector('.questionTemplate').cloneNode(true);
+    node.hidden = false;
+    node.classList = ['question', 'mb-5'].join(' ');
+    document.querySelector('#questionList').append(node);
+}
+
+function createForm() {
+    let title = document.querySelector('input[name=title]').value;
+    let questions = Array.from(document.querySelectorAll('.question')).map(node => [
+        node.querySelector('input[name=question]').value,
+        node.querySelector('input[name=required]').checked
+    ]);
+
+    let form = document.createElement('form');
+    form.hidden = true;
+    form.action = '/form/create';
+    form.method = 'POST';
+    let titleInput = document.createElement('input');
+    titleInput.name = 'title';
+    titleInput.value = title;
+    form.appendChild(titleInput);
+    let questionsInput = document.createElement('input');
+    questionsInput.name = 'questions';
+    questionsInput.value = JSON.stringify(questions);
+    form.appendChild(questionsInput);
+    document.body.appendChild(form);
+    form.submit();
+}
+</script>
+{% endblock %}

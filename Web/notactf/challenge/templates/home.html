@@ -1,0 +1,63 @@
+<html>
+
+<head>
+
+
+	<title>Home</title>
+	<link rel="stylesheet" type="text/css" href="static/css/home.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+
+
+<div id="navbar">
+
+	<div class="nav">
+		<a class="active" href="/challenges">Challenges</a>
+		<a href="/home">Home</a>
+		<a href="/leaderboard">Leaderboard</a>
+		<a href="/solves">Solves</a>
+		<a href="/discord">Discord</a>
+
+
+		<input id="flag" type="text" placeholder="Submit a Flag!" required>
+  <button id="flagsubmit" type="submit" onclick="submitflag()"><i class="s"></i>Submit</button>
+  
+  <a href="/logout" class="logout" style="float: right;">Logout</a>
+
+</div>
+
+
+<h1 style="text-align: center">Welcome to notactf!</h1>
+<br>
+
+<script>
+  
+
+function submitflag(){
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/submit');
+
+
+    xhr.setRequestHeader('submitted-flag', document.getElementById('flag').value);
+    xhr.setRequestHeader('user-auth-token', "{{authtoken}}");
+
+    xhr.send();
+
+    xhr.onload = () => {
+      alert(xhr.responseText);
+    }
+    
+      var clearflag = document.getElementById("flag");
+      clearflag.value = "";
+
+
+}
+</script>
+<script src="static/js/home.js"></script>
+</body>
+
+
+</html>

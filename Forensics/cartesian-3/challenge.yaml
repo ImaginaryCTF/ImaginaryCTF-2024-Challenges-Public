@@ -1,0 +1,16 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: "cartesian-3"
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+    ports:
+      - protocol: "TCP"
+        port: 80
+        targetPort: 5000
+  healthcheck:
+    enabled: false
+  image: eu.gcr.io/imaginaryctf-2023/cartesian-3-challenge:c4ca62e8b1b485401b548b601d9e1cda082dc29327c3f737c242e32d5f7e1aa5

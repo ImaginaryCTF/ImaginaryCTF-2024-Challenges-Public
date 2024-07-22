@@ -1,0 +1,7 @@
+version: '3.3'
+services:
+  deployment:
+    hostname: $FLAG
+    build: .
+    ports:
+      - 10001:80

@@ -1,0 +1,17 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: "the-amazing-race"
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+    ports:
+      - protocol: "TCP"
+        port: 80
+        targetPort: 8000
+  healthcheck:
+    enabled: false
+    image: eu.gcr.io/imaginaryctf-2023/the-amazing-race-healthcheck:ff55da9c97548e7b121d444595a202b6264475e58dae8388bc2740eb4743a82f
+  image: eu.gcr.io/imaginaryctf-2023/the-amazing-race-challenge:917eabfdcc7df70757b0fe2e437eee018065b32ca7d61ca3eb1cfa8e916fba79

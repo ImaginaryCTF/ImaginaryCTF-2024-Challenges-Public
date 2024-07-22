@@ -1,0 +1,116 @@
+<html>
+<head>
+
+
+<title>Solves</title>
+<link rel="stylesheet" type="text/css" href="static/css/solves.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+
+
+<div id="navbar">
+
+<div class="nav">
+  <a class="active" href="/challenges">Challenges</a>
+  <a href="/home">Home</a>
+  <a href="/leaderboard">Leaderboard</a>
+  <a href="/solves">Solves</a>
+  <a href="/discord">Discord</a>
+  
+
+  <input id="flag" type="text" placeholder="Submit a Flag!" required>
+  <button id="flagsubmit" type="submit" onclick="submitflag()"><i class="s"></i>Submit</button>
+  
+  <a href="/logout" class="logout" style="float: right;">Logout</a>
+
+</div>
+
+<center><h1>All Solves:</h1>
+<div id="no-solves">
+<h3>Looks like there's no solves yet!</h3>
+</div>
+<!--
+
+oldsolves
+
+-->
+</center>
+
+<div id="solve-table">
+<table>
+  <tr>
+    <th>Player</th>
+    <th>Challenge</th>
+    <th>Points Gained</th>
+  </tr>
+
+{% for chall in solved_challenges %}
+
+  <tr>
+    <td>{{chall.get('solved_by')}}</td>
+    <td>{{chall.get('solved')}}</td>
+    <td>{{chall.get('points')}}</td>
+  </tr>
+
+{% endfor %}
+
+</table>
+</div>
+
+<script>
+var solve_table = document.getElementById("solve-table");
+solve_table.style.display = "none";
+
+function check(){
+
+var b = document.getElementById("no-solves");
+b.style.display = "none";
+
+//var solve_table = document.getElementById("solve-table");
+//solve_table.style.display = "none";
+
+let x = String("{{solved_challenges}}")
+console.log(x)
+if (x == "[]"){
+  var b = document.getElementById("no-solves");
+  b.style.display = "block";
+} else if (x != "[]"){
+  solve_table.style.display = "block";
+}
+
+
+
+}
+
+function submitflag(){
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/submit');
+
+
+    xhr.setRequestHeader('submitted-flag', document.getElementById('flag').value);
+    xhr.setRequestHeader('user-auth-token', "{{authtoken}}");
+
+    xhr.send();
+
+    xhr.onload = () => {
+      alert(xhr.responseText);
+    }
+    
+      var clearflag = document.getElementById("flag");
+      clearflag.value = "";
+
+
+}
+
+
+check();
+</script>
+<script src="static/js/home.js"></script>
+
+</body>
+
+
+</html>

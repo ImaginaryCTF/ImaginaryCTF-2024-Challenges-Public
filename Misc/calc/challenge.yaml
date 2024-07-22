@@ -1,0 +1,11 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: calc
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+  healthcheck:
+    enabled: false
